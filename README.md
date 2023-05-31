@@ -8,20 +8,23 @@
 - OtherService : Containing User model (use this service according to your needs) it contains only one model used to manage user informations. </br>
 - ApiGateway : Acts as a single point of entry for customers who wish to access different services of your application. Here is a summary of the main functions of a gateway API: </br>
 
-## Tech's I used
-
-![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white) ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Sever-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
-
-## Cool Features 
+## Cool Features 🧙‍♂️
 
 - JWT authorization and using Claims for API calls
 - Session creation and keeping sessionId in secured and signed cookie
 - JWT stored in secured and signed cookie
 - Middlewares verifying JWT & Cookies integrity
+- using cryptography methods
 
 <strong>Cookies are signed with secret keys in `appsettings.json`. When passing by Cookie middleware, it generate hash based on cookie value with secret key. hash freshly created is compared with cookie hash and return boolean value if cookie was changed or not.</strong>
-<br>
+
 <strong>SessionId is store in secured cookie with same mecanism as above. SessionId is encrypt with AES keys and can be used in API calls just as in `isConnected()` method able to return if user is connected.</strong>
+
+---
+
+## Tech's I used
+
+![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white) ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Sever-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
 
 ## Before launching project 🚨
@@ -92,4 +95,8 @@ GET THEM : <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downlo
 
 -> see it : <a href="https://github.com/Yekuuun/Asp-Net-Authentification/blob/main/MicroServices/AuthService/AuthService.csproj">DEPENDENCIES</a>
 
+
+## Learn about micro services with .NET ?
+
+-> see it : <a href="[https://github.com/Yekuuun/Asp-Net-Authentification/blob/main/MicroServices/AuthService/AuthService.csproj](https://www.youtube.com/watch?v=DgVjEo3OGBI&t=3135s)">DEPENDENCIES</a>
 
