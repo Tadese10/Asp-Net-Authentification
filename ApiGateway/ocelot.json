@@ -1,0 +1,46 @@
+{
+    "Routes": [
+      {
+        "DownstreamPathTemplate": "/api/userservice/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5001
+          }
+        ],
+        "UpstreamPathTemplate": "/api/userservice/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+        "CorsPolicyConfiguration": {
+          "CorsPaths": [ "/api/userservice/{everything}" ],
+          "CorsOrigins": [ "http://frontend-url" ],
+          "CorsMethods": [ "GET", "POST" ],
+          "CorsHeaders": [ "Content-Type" ],
+          "IsAllowAll": false
+        }
+      },
+      {
+        "DownstreamPathTemplate": "/api/authservice/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5002
+          }
+        ],
+        "UpstreamPathTemplate": "/api/authservice/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+        "CorsPolicyConfiguration": {
+          "CorsPaths": [ "/api/authservice/{everything}" ],
+          "CorsOrigins": [ "http://frontend-url" ],
+          "CorsMethods": [ "GET", "POST" ],
+          "CorsHeaders": [ "Content-Type" ],
+          "IsAllowAll": false
+        }
+      }
+    ],
+    "GlobalConfiguration": {
+      "BaseUrl": "http://localhost:5000"
+    }
+}
+  
