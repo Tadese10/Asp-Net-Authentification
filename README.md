@@ -5,8 +5,8 @@
 ## Micro-services
 
 - AuthService : Managing authentification with tokens and secure cookies </br>
-- OtherService : Containing User model (use this service according to your needs) it contains only one model used to manage user informations. </br>
-- ApiGateway : Acts as a single point of entry for customers who wish to access different services of your application. Here is a summary of the main functions of a gateway API: </br>
+- OtherService : Containing User model (use this service according to your needs) it contains only one model used to manage user informations and show you the purpose of micro-services and how to use it</br>
+- ApiGateway : Acts as a single point of entry for customers who wish to access different services of your application </br>
 
 ## Cool Features 🧙‍♂️
 
@@ -95,8 +95,9 @@ GET THEM : <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downlo
 
 -> see it : <a href="https://github.com/Yekuuun/Asp-Net-Authentification/blob/main/MicroServices/AuthService/AuthService.csproj">DEPENDENCIES</a>
 
+</br>
 
-## Learn about micro services with .NET ?
+## Learn about micro-services with .NET ?
 
--> see it : <a href="[https://github.com/Yekuuun/Asp-Net-Authentification/blob/main/MicroServices/AuthService/AuthService.csproj](https://www.youtube.com/watch?v=DgVjEo3OGBI&t=3135s)">DEPENDENCIES</a>
+-> see it : <a href="https://www.youtube.com/watch?v=DgVjEo3OGBI&t=3135s">Youtube video</a>
 
