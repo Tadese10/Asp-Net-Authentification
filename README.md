@@ -26,7 +26,40 @@ GET THEM : <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downlo
 
 ## Launch project :
 
-- under construction...
+- clone project on your laptop with `git clone https://github.com/Yekuuun/Asp-Net-Authentification.git`
+
+1. <strong>Api Gateway</strong>
+
+- go to ApiGateway folder with `cd ApiGateway`
+- restore dependencies with `dotnet restore`
+- `dotnet watch run` to run the project
+
+<strong>I decided to use port 5000 for api gateway but you can change it in `Properties` folder
+  
+2. <strong> Auth Service</strong>
+
+- go to AuthService with `cd MicroServices/AuthService`
+- restore dependencies with dotnet restore
+- create `Migrations` folder to contain your migrations
+- create first migration with `dotnet ef migrations add "MigrationName" `
+- use `dotnet ef database update` to apply changements to your local DB
+- `dotnet watch run` to run the project
+  
+<strong>You can change ports by going into `Properties` file</strong>
+</br>
+
+3. <strong> Other Service</strong>
+
+- go to AuthService with `cd MicroServices/OtherService`
+- restore dependencies with dotnet restore
+- create `Migrations` folder to contain your migrations
+- create first migration with `dotnet ef migrations add "MigrationName" `
+- use `dotnet ef database update` to apply changements to your local DB
+- `dotnet watch run` to run the project
+  
+<strong>You can change ports by going into `Properties` file</strong>
+</br>
+<strong>This folder contain code related to other service than AuthService and was implemented to give an example of how to communicate with AuthService</strong>
 
 
 
