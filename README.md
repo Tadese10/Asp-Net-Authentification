@@ -12,6 +12,17 @@
 
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white) ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Sever-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
+## Cool Features 
+
+- JWT authorization and using Claims for API calls
+- Session creation and keeping sessionId in secured and signed cookie
+- JWT stored in secured and signed cookie
+- Middlewares verifying JWT & Cookies integrity
+
+<strong>Cookies are signed with secret keys in `appsettings.json`. When passing by Cookie middleware, it generate hash based on cookie value with secret key. hash freshly created is compared with cookie hash and return boolean value if cookie was changed or not.</strong>
+<br>
+<strong>SessionId is store in secured cookie with same mecanism as above. SessionId is encrypt with AES keys and can be used in API calls just as in `isConnected()` method able to return if user is connected.</strong>
+
 
 ## Before launching project 🚨
 
@@ -36,6 +47,8 @@ GET THEM : <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downlo
 
 <strong>I decided to use port 5000 for api gateway but you can change it in `Properties` folder
   
+---
+  
 2. <strong> Auth Service</strong>
 
 - go to AuthService with `cd MicroServices/AuthService`
@@ -47,6 +60,8 @@ GET THEM : <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downlo
   
 <strong>You can change ports by going into `Properties` file</strong>
 </br>
+
+---
 
 3. <strong> Other Service</strong>
 
@@ -62,6 +77,19 @@ GET THEM : <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downlo
 <strong>This folder contain code related to other service than AuthService and was implemented to give an example of how to communicate with AuthService</strong>
 
 
+---
 
+## Dependencies :
+
+- AutoMapper
+- EntityFrameworkCore
+- EntityFrameworkCore.Design
+- EntityFrameworkCore.SqlServer
+- JWT
+- Cookies
+- JSON deserializer
+- Swashbukle.Filter
+
+-> see it : <a href="https://github.com/Yekuuun/Asp-Net-Authentification/blob/main/MicroServices/AuthService/AuthService.csproj">DEPENDENCIES</a>
 
 
