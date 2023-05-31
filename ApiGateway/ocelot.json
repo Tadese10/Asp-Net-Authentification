@@ -1,7 +1,7 @@
 {
     "Routes": [
       {
-        "DownstreamPathTemplate": "/api/userservice/{everything}",
+        "DownstreamPathTemplate": "/api/otherservice/{everything}",
         "DownstreamScheme": "http",
         "DownstreamHostAndPorts": [
           {
@@ -9,7 +9,7 @@
             "Port": 5001
           }
         ],
-        "UpstreamPathTemplate": "/api/userservice/{everything}",
+        "UpstreamPathTemplate": "/api/otherservice/{everything}",
         "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
         "CorsPolicyConfiguration": {
           "CorsPaths": [ "/api/userservice/{everything}" ],
