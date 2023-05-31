@@ -2,7 +2,7 @@
 
 <strong>This repo contains a simple authentification micro-service addable to your project containing a simple login & registration system with other cool & secured tool for more efficienty.</strong>
 
-## Micro-services
+## Microservices
 
 - AuthService : Managing authentification with tokens and secure cookies </br>
 - OtherService : Containing User model (use this service according to your needs) it contains only one model used to manage user informations and show you the purpose of micro-services and how to use it</br>
@@ -97,7 +97,7 @@ GET THEM : <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downlo
 
 </br>
 
-## Learn about micro-services with .NET ?
+## Learn about microservices with .NET ?
 
 -> see it : <a href="https://www.youtube.com/watch?v=DgVjEo3OGBI&t=3135s">Youtube video</a>
 
