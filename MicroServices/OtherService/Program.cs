@@ -1,6 +1,9 @@
 global using Models;
 global using Data;
 global using AutoMapper;
+global using Services;
+global using Dtos;
+global using Middlewares;
 
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -50,6 +53,9 @@ builder.Services.AddSwaggerGen(c => {
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 //SERVICES
+builder.Services.AddScoped<IUserService, Services.UserService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddSingleton<ICryptService, CryptService>();
 
 
 builder.Services.AddHttpClient();
@@ -92,11 +98,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-/*app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/userservice"), appBuilder =>
+app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/userservice"), appBuilder =>
 {
     appBuilder.UseCookieVerification();
     appBuilder.UseJWTVerification();
-});*/
+});
 
 app.UseAuthentication();
 

@@ -9,6 +9,7 @@ namespace Server
             //<t> source => <t> destination
             
             //USER
+            CreateMap<User, GetUserDto>();
         }
     }
 }

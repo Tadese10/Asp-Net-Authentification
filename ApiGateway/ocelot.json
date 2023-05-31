@@ -12,7 +12,26 @@
         "UpstreamPathTemplate": "/api/otherservice/{everything}",
         "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
         "CorsPolicyConfiguration": {
-          "CorsPaths": [ "/api/userservice/{everything}" ],
+          "CorsPaths": [ "/api/otherservice/{everything}" ],
+          "CorsOrigins": [ "http://frontend-url" ],
+          "CorsMethods": [ "GET", "POST" ],
+          "CorsHeaders": [ "Content-Type" ],
+          "IsAllowAll": false
+        }
+      },
+      {
+        "DownstreamPathTemplate": "/api/public/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5001
+          }
+        ],
+        "UpstreamPathTemplate": "/api/public/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+        "CorsPolicyConfiguration": {
+          "CorsPaths": [ "/api/public/{everything}" ],
           "CorsOrigins": [ "http://frontend-url" ],
           "CorsMethods": [ "GET", "POST" ],
           "CorsHeaders": [ "Content-Type" ],

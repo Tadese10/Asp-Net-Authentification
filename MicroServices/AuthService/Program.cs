@@ -1,6 +1,8 @@
 global using Models;
 global using AutoMapper;
 global using Data;
+global using Services;
+global using Dtos;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -24,6 +26,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 //Services
+builder.Services.AddScoped<ISessionService, SessionService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ICryptService, CryptService>();
+builder.Services.AddScoped<ICookieService, CookieService>();
 
 //CORS POLICY
 builder.Services.AddCors(options =>

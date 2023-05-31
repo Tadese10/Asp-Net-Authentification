@@ -5,7 +5,7 @@ namespace Server
         public AutoMapperProfiles()
         {
             //<t> source => <t> destination
-            //CreateMap<UserDto, Session>();
+            CreateMap<UserDto, Session>();
         }
     }
 }
