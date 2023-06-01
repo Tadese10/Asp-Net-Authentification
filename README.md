@@ -1,10 +1,10 @@
 # ASP .NET 7.0 Authentification 🔒
 
-<strong>This repo contains a simple authentification system in a microservice based infrastructure addable to your project containing a simple login & registration system with other cool & secured tool for more efficienty with an API gateway and an other service used as an example in this case.</strong>
+<strong>This repo contains a simple authentification system in a microservice based infrastructure addable to your project containing a simple login & registration system with other cool & secured tools for more efficienty with an API gateway and other service used as an example in this case.</strong>
 
 ## Microservices
 
-- AuthService : Managing authentification with tokens and secure cookies </br>
+- AuthService : Managing authentification with tokens and secure cookies + session handler </br>
 - OtherService : Containing User model (use this service according to your needs) it contains only one model used to manage user informations and show you the purpose of micro-services and how to use it</br>
 - ApiGateway : Acts as a single point of entry for customers who wish to access different services of your application </br>
 
