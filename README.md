@@ -1,6 +1,6 @@
 # ASP .NET 7.0 Authentification 🔒
 
-<strong>This repo contains a simple authentification system in a microservice based infrastructure addable to your project containing a simple login & registration system with other cool & secured tools for more efficienty with an API gateway and other service used as an example in this case.</strong>
+<strong>Complete and simple authentification system in a microservice based infrastructure addable to your project containing a simple login & registration system with other cryptographic methods and tools for more security. Adding Ocelot as Api gateway for communication between services demonstration./strong>
 
 ## Microservices
 
