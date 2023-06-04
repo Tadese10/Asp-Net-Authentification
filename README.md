@@ -1,6 +1,6 @@
 # ASP .NET 7.0 Authentification 🔒
 
-<strong>Complete and simple authentification system in a microservice based infrastructure addable to your project containing a simple login & registration system with other cryptographic methods and tools for more security. Adding Ocelot as Api gateway for communication between services demonstration./strong>
+<strong>Complete and simple authentification implementation in a microservice based infrastructure addable to your project. Containing a simple login & registration system with cryptographic methods and tools for more security. Adding Ocelot as Api gateway and synchronous method for communication between user service and authentification service./strong>
 
 ## Microservices
 
@@ -10,11 +10,12 @@
 
 ## Cool Features 🧙‍♂️
 
-- JWT authorization and using Claims for API calls
+- JWT authorization and restrictions
+- Using claims in requests
 - Session creation and keeping sessionId in secured and signed cookie
 - JWT stored in secured and signed cookie
 - Middlewares verifying JWT & Cookies integrity
-- using cryptography methods
+- using cryptography methods to hash cookie values
 
 <strong>Cookies are signed with secret keys in `appsettings.json`. When passing by Cookie middleware, it generate hash based on cookie value with secret key. hash freshly created is compared with cookie hash and return boolean value if cookie was changed or not.</strong>
 
