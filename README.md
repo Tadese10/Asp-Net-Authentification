@@ -35,7 +35,7 @@
 - Make sure that SQL server and SQL server management studio are installed on your machine <br> 
 GET THEM : <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">SQL Express</a> & <a href="https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16">SSMS</a>
 
-- Install Entity Framework on your machine</strong>
+- Install globally Entity Framework on your machine with `dotnet tool install --global dotnet-ef` and use `dotnet ef --version`</strong>
 
 ---
 
