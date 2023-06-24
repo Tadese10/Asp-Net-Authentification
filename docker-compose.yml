@@ -1,0 +1,81 @@
+networks:
+  backend:
+
+volumes:
+  other-data:
+  auth-data:
+
+services:
+  otherdb:
+    container_name: other-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=pwd@12345#
+    user: root
+    networks:
+      - backend
+    ports:
+      - 8001:1433
+    volumes:
+      - type: volume
+        source: other-data
+        target: /var/opt/mssql
+  authdb:
+    container_name: auth-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=pwd@12345#
+    user: root
+    networks:
+      - backend
+    ports:
+      - 8002:1433
+    volumes:
+      - type: volume
+        source: auth-data
+        target: /var/opt/mssql
+
+
+  otherservice:
+    container_name: other-api
+    image: ${DOCKER_REGISTRY-}otherservice
+    build:
+      context: .
+      dockerfile: MicroServices/OtherService/Dockerfile
+    networks:
+      - backend
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=user-db;Database=user;User Id=SA;Password=pwd@12345#;TrustServerCertificate=True;Trusted_Connection=true;
+    # in development we will synchronize this  option and execute dotnet watch run in entrypoint
+    # volumes:
+    #   - ./UserService/:/app
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        dotnet tool install --global dotnet-ef 
+        dotnet ef database update
+        dotnet watch run
+    
+    ports:
+      - 5001:80
+    depends_on: [otherdb]
+  
+  authservice:
+    container_name: auth-api
+    image: ${DOCKER_REGISTRY-}authservice
+    build:
+      context: .
+      dockerfile: MicroServices/AuthService/Dockerfile
+    networks:
+      - backend
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=auth-db;Database=auth;User Id=SA;Password=pwd@12345#;TrustServerCertificate=True;Trusted_Connection=true;
+    # volumes:
+    #   - ./AuthService:/app
+    ports:
+      - 5002:80
+    depends_on: [authdb]

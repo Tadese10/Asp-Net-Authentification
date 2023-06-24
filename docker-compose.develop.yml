@@ -1,0 +1,119 @@
+networks:
+  backend:
+  backend-other:
+  backend-auth:
+
+volumes:
+  other-data:
+  auth-data:
+
+services:
+  # DB
+  otherdb:
+    container_name: other-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=pwd@12345#
+    user: root
+    networks:
+      - backend-other
+    ports:
+      - 8001:1433
+    volumes:
+      - type: volume
+        source: other-data
+        target: /var/opt/mssql
+
+  authdb:
+    container_name: auth-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=pwd@12345#
+    user: root
+    networks:
+      - backend-auth
+    ports:
+      - 8002:1433
+    volumes:
+      - type: volume
+        source: auth-data
+        target: /var/opt/mssql
+
+  # SERVICE
+  apigateway:
+    container_name: apigateway
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile.develop
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+    volumes:
+      - ./ApiGateway/:/src/ApiGateway
+      - /src/ApiGateway/bin
+      - /src/ApiGateway/obj
+    ports:
+      - 5000:80
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        dotnet tool install --global dotnet-ef 
+        dotnet watch run --no-restore --urls http://0.0.0.0:80 -c Debug --
+
+  otherservice:
+    container_name: other-api
+    image: ${DOCKER_REGISTRY-}otherservice
+    build:
+      context: .
+      dockerfile: MicroServices/OtherService/Dockerfile.develop
+    networks:
+      - backend
+      - backend-other
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ConnectionStrings__DefaultConnection=Server=user-db;Database=user;User Id=SA;Password=pwd@12345#;TrustServerCertificate=True;Trusted_Connection=false;
+    volumes:
+      - ./MicroServices/OtherService/:/src/MicroServices/OtherService
+      - /src/MicroServices/OtherService/bin
+      - /src/MicroServices/OtherService/obj
+    ports:
+      - 5001:80
+    depends_on: [otherdb]
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        dotnet tool install --global dotnet-ef 
+        dotnet watch run --no-restore --urls http://0.0.0.0:80 -c Debug --
+  
+  authservice:
+    container_name: auth-api
+    image: ${DOCKER_REGISTRY-}authservice
+    build:
+      context: .
+      dockerfile: MicroServices/AuthService/Dockerfile.develop
+    networks:
+      - backend
+      - backend-auth
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=auth-db;Database=auth;User Id=SA;Password=pwd@12345#;TrustServerCertificate=True;Trusted_Connection=false;
+    volumes:
+      - ./MicroServices/AuthService:/src/MicroServices/AuthService
+      - /src/MicroServices/AuthService/bin
+      - /src/MicroServices/AuthService/obj
+    ports:
+      - 5002:80
+    depends_on: [authdb]
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        dotnet tool install --global dotnet-ef 
+        dotnet watch run --no-restore --urls http://0.0.0.0:80 -c Debug --

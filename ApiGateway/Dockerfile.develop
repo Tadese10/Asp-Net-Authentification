@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+ENV ASPNETCORE_ENVIRONMENT=Development
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+COPY ["ApiGateway/ApiGateway.csproj", "ApiGateway/"]
+RUN dotnet restore "ApiGateway/ApiGateway.csproj"
+COPY . .
+WORKDIR "/src/ApiGateway"
+RUN dotnet build "ApiGateway.csproj" -c Debug
+# RUN dotnet tool install --global dotnet-ef 
+# RUN dotnet dev-certs https --clean
+# RUN dotnet dev-certs https --trust
+ENV PATH="${PATH}:/root/.dotnet/tools"
+# RUN dotnet-ef database update
+# ENTRYPOINT ["dotnet", "watch", "run", "--no-build", "--no-launch-profile", "-c", "Debug", "--"]
+# ENTRYPOINT ["dotnet", "watch", "run",  "--no-restore", "--urls", "http://0.0.0.0:80", "-c", "Debug", "--"]
+# ENTRYPOINT ["ls", "."]
