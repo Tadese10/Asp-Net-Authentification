@@ -14,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //ocelot configuration
-builder.Services.AddOcelot();
+builder.Services.AddOcelot(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {
@@ -26,6 +26,7 @@ builder.Services.AddCors(options =>
                .AllowCredentials(); // Autoriser les cookies
     });
 });
+
 
 
 var app = builder.Build();

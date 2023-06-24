@@ -1,10 +1,9 @@
 global using Models;
-global using AutoMapper;
-global using Data;
 global using Services;
+global using Data;
 global using Dtos;
+global using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-
 
 //cors variable
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -60,5 +59,18 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+// REVIEW: This is done fore development east but shouldn't be here in production
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+    // var logger = app.Services.GetService<ILogger<DataContextSeed>>();
+    await context.Database.MigrateAsync();
+
+    // await new DataContextSeed().SeedAsync(context);
+    // await integEventContext.Database.MigrateAsync();
+}
+
 
 app.Run();

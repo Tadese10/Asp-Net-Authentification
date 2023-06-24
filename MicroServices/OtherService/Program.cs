@@ -1,16 +1,7 @@
-global using Models;
-global using Data;
-global using AutoMapper;
-global using Services;
-global using Dtos;
-global using Middlewares;
-
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Filters;
-
 
 //cors variable
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -26,6 +17,14 @@ var handler = new HttpClientHandler
 builder.Services.AddSingleton(new HttpClient(handler));
 
 //DB context
+// var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+// var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+// var dbPassword = Environment.GetEnvironmentVariable("DB_MSSQL_SA_PASSWORD");
+// var _connStr = $"Server={dbHost};Database={dbName};User Id=SA;Password={dbPassword};TrustServerCertificate=True;Trusted_Connection=true;";
+
+// builder.Services.AddDbContext<DataContext>(options =>
+//     options.UseSqlServer(_connStr));
+
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -34,7 +33,6 @@ builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 //swagger configuration
 builder.Services.AddSwaggerGen(c => {
@@ -56,7 +54,6 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IUserService, Services.UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddSingleton<ICryptService, CryptService>();
-
 
 builder.Services.AddHttpClient();
 
@@ -104,10 +101,22 @@ app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/userservice
     appBuilder.UseJWTVerification();
 });
 
+
 app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+// REVIEW: This is done fore development east but shouldn't be here in production
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+    //var logger = app.Services.GetService<ILogger<DataContextSeed>>();
+    await context.Database.MigrateAsync();
+
+    //await new DataContextSeed().SeedAsync(context);
+    // await integEventContext.Database.MigrateAsync();
+}
 
 app.Run();
