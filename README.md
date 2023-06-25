@@ -46,7 +46,7 @@
 - Clone project on your laptop with `git clone https://github.com/Yekuuun/Asp-Net-Authentification.git`
 
 - Open a new terminal and run ´docker-compose -f docker-compose.develop.yml up´ to install all dependencies and launch docker solution
-(if you have problems with docker you can remove all your old images and containers with `docker system prune -a` & ´docker volume prune´)
+(if you have problems with docker you can remove all your old images and containers with `docker system prune -a` & `docker volume prune` )
 
 ---
 
