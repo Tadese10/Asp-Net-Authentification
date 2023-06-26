@@ -78,7 +78,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionStrings__DefaultConnection=Server=user-db;Database=user;User Id=SA;Password=pwd@12345#;TrustServerCertificate=True;Trusted_Connection=false;
+      - ConnectionStrings__DefaultConnection=Server=other-db;Database=other;User Id=SA;Password=pwd@12345#;TrustServerCertificate=True;Trusted_Connection=false;
     volumes:
       - ./MicroServices/OtherService/:/src/MicroServices/OtherService
       - /src/MicroServices/OtherService/bin

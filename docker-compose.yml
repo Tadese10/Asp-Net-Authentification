@@ -48,7 +48,7 @@ services:
       - backend
     environment:
       # - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=user-db;Database=user;User Id=SA;Password=pwd@12345#;TrustServerCertificate=True;Trusted_Connection=true;
+      - ConnectionStrings__DefaultConnection=Server=other-db;Database=other;User Id=SA;Password=pwd@12345#;TrustServerCertificate=True;Trusted_Connection=true;
     # in development we will synchronize this  option and execute dotnet watch run in entrypoint
     # volumes:
     #   - ./UserService/:/app

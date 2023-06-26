@@ -45,7 +45,7 @@ namespace Services
 
                 else
                 {
-                    var microServiceResponse = await CallSessionManagerService($"http://localhost:5000/api/authservice/Auth/CreateSession/{user.UserId}");
+                    var microServiceResponse = await CallSessionManagerService($"http://localhost:5002/api/authservice/Auth/CreateSession/{user.UserId}");
                     
                     if(!microServiceResponse.Success)
                     {
@@ -98,7 +98,7 @@ namespace Services
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
-                var microServiceResponse = await CallSessionManagerService($"http://localhost:5000/api/authservice/Auth/CreateSession/{user.UserId}");
+                var microServiceResponse = await CallSessionManagerService($"http://localhost:5002/api/authservice/Auth/CreateSession/{user.UserId}");
                 
                 if(!microServiceResponse.Success)
                 {
@@ -138,6 +138,7 @@ namespace Services
                     httpClient.Timeout = TimeSpan.FromSeconds(30);
 
                     var apiRequest = await httpClient.GetAsync(url);
+
                     apiRequest.EnsureSuccessStatusCode();
                     
                     var responseBody = await apiRequest.Content.ReadAsStringAsync();
