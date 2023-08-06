@@ -1,6 +1,6 @@
 # ASP .NET 7.0 Authentification 🔒
 
-<strong>Complete and simple authentification implementation in a microservice based infrastructure addable to your project. Containing a simple login & registration system with cryptographic methods and tools for more security. Adding Ocelot as Api gateway and synchronous method for communication between user service and authentification service. Adding all this solution in a docker environnement. </strong>
+<strong>Complete and simple authentification implementation in a microservice based infrastructure addable to your project. Containing a simple login & registration system with cryptographic methods and tools for more security. Adding Ocelot as Api gateway and synchronous method for communication between user service and authentification service. Adding all this solution in a docker environnement. Creating persistent connexion through cookies methods. </strong>
 
 ## Microservices
 
